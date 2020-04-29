@@ -8,6 +8,10 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+
+import javax.swing.*;
+import java.util.List;
 
 import static java.lang.Thread.*;
 import static org.junit.Assert.assertTrue;
@@ -70,6 +74,19 @@ public class AppTest
         sleep(1000);
         WebElement imagesLink = driver.findElement(By.className("NZmxZe"));
         assertTrue(imagesLink.isDisplayed());
+        Actions action = new Actions(driver);
+        action.moveByOffset(50, 50).clickAndHold().moveByOffset(0, 50).release().perform();
+    }
+
+    @Test
+    public void seleniumExampleMouseActionsTest() throws InterruptedException{
+        driver.manage().window().maximize();
+        sleep(2000);
+        driver.get("https://www.youidraw.com/apps/painter/");
+        sleep(1000);
+        Actions action = new Actions(driver);
+        action.moveByOffset(750, 450).clickAndHold().moveByOffset(0, 50).release().perform();
+        sleep(5000);
     }
 
     @After
