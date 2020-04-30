@@ -3,7 +3,9 @@ package org.example;
 import com.relevantcodes.extentreports.ExtentReports;
 import com.relevantcodes.extentreports.ExtentTest;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 
 import java.io.File;
@@ -26,6 +28,10 @@ public class SeleniumWithExtentReportTest {
         report.loadConfig(new File(System.getProperty("user.dir" + "\\extent-report.xml")));
     }
 
+    @BeforeMethod
+    public void setUp(){
+        driver = new ChromeDriver();
+    }
 
     @AfterTest
     public void endReport(){
