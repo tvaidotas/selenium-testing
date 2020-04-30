@@ -12,6 +12,7 @@ import org.testng.annotations.*;
 import java.io.File;
 import java.io.IOException;
 
+import static java.lang.Thread.*;
 import static org.testng.Assert.assertEquals;
 import static org.testng.AssertJUnit.assertTrue;
 
@@ -61,6 +62,23 @@ public class SeleniumWithExtentReportTest {
         File picture = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(picture, new File(System.getProperty("user.dir") + "/test-output/logoPage.jpg"));
         test.log(LogStatus.PASS, "The logo was present", "<img src=logoPage.jpg>");
+    }
+
+    @Test
+    public void jsExample() throws InterruptedException {
+        test = report.startTest("Starting JS example test");
+        driver.manage().window().maximize();
+        test.log(LogStatus.INFO, "Started chrome browser and made it fullscreen");
+        driver.get("https://www.qa.com");
+        test.log(LogStatus.INFO, "Navigating to the QA website");
+        if (driver instanceof JavascriptExecutor){
+            ((JavascriptExecutor) driver).executeScript("alert('Hello Everybody')");
+            sleep(2000);
+            driver.switchTo().alert().accept();
+            sleep(2000);
+        } else {
+            System.out.println("Can't execute JS");
+        }
     }
 
 
